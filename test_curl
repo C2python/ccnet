@@ -1,1 +1,4 @@
-curl -X POST http://127.0.0.1:8000/sdnet/ -d '{ "Action": "GetSwitch","kwargs": { "dev": "pl01"}}'
+curl -X POST http://127.0.0.1:8000/sdnet/ -d '{ "Action": "AddSwitch","kwargs": { "dev": "pl01", "manufacturer": "hw","mgmt_ip": "10.10.80.69","vtep_ip": "10.10.100.1"}}'
+
+curl -X POST http://127.0.0.1:8000/sdnet/ -d '{ "Action": "GetSwitch","kwargs": { "dev": "pl01", "manufacturer": "hw"}}'
+

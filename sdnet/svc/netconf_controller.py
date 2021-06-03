@@ -36,7 +36,7 @@ class CNetconfController(object):
                     "manufacturer": sw.manufacturer,
                     "mgmt_ip": sw.mgmt_ip,
                     "vtep_ip": sw.vtep_ip,
-                    "create_at": sw.create_at,
+                    "create_at": sw.create_at.strftime('%Y-%m-%d %H:%M:%S'),
                 }
             }
         except KeyError:

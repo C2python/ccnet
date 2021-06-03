@@ -8,4 +8,4 @@ class Switchs(models.Model):
     mgmt_ip = models.CharField(max_length=136)
     vtep_ip = models.CharField(max_length=136)
     create_at = models.DateTimeField("添加时间",auto_now_add=True)
-    deleted_at = models.DateTimeField("删除时间")
+    deleted_at = models.DateTimeField("删除时间",null=True, default=None)
