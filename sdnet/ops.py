@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from sdnet.netconf import *
+from sdnet.svc import l2
 
 actions = {
-    #"CheckDomain": domains.check_domain,
+    "GetSwitch": l2.get_switch,
+    "CreateVlan": l2.create_vlan,
 }

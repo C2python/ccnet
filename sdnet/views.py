@@ -28,10 +28,12 @@ def health(request):
 
 def fallback(request):
     try:
+        import pdb
+        #pdb.set_trace()
         if request.method != 'POST':
             raise CcnetException(6100)
         req_data = request.body
-        body_json = json.load(req_data.decode("utf8"))
+        body_json = json.loads(req_data.decode(encoding="utf-8"))
         ret = actions[body_json['Action']](request,body_json["kwargs"])
     except KeyError:
         logger.info("Invaild Request")
