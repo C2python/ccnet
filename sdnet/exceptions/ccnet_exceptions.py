@@ -1,6 +1,17 @@
 # -*- coding: utf8 -*-
 
+INVALID_PARA = 4000
+INVALID_AUTH = 4100
 
+DUPLICATE_SW = 4101
+
+error_code = {
+    4000: "请求参数非法",
+    4100: "身份认证失败",
+    4101: "资源已存在"
+}
+
+'''
 error_code = {
     4000: "请求参数非法",
     4100: "身份认证失败",
@@ -25,6 +36,7 @@ error_code = {
     6100: "版本暂不支持",
     6200: "接口暂时无法访问"
 }
+'''
 
 class CcnetConnectionTimeoutException(Exception):
     '''处理ccnet的超时异常'''
@@ -37,6 +49,13 @@ class CcnetConnectionTimeoutException(Exception):
 
 class CcnetException(Exception):
     '''ccnet的Except'''
+    def __init__(self,code):
+        self.code = code
+        self.message = error_code[code]
+    def __str__(self):
+        return "{code: %s, message: %s}" % (self.code,self.message)
+    
+class CcnetInvalidRequestException(Exception):
     def __init__(self,code):
         self.code = code
         self.message = error_code[code]

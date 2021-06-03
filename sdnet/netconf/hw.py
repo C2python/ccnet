@@ -9,8 +9,11 @@ class HWAgent(object):
     def connect(self):
         pass
 
-    def get_switch(self):
+    def get_switch(self,params):
         return {
             "manufacturer": "hw",
             "Version": "CE6880",
             }
+    
+    def add_switch(self,params):
+        pass

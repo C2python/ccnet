@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
+from sdnet.exceptions.ccnet_exceptions import CcnetInvalidRequestException
 from sdnet.svc.netconf_controller import CNetconfController
 from django.http import HttpResponse
 from django.conf import settings
@@ -54,6 +55,32 @@ def get_switch(request,params):
     nfc = CNetconfController()
     try:
         ret = nfc.get_switch(params)
+    except:
+        return HttpResponseServerError()
+    return HttpResponse(json.dumps(ret,ensure_ascii=False),content_type="application/json;charset=utf-8")
+
+def add_switch(request,params):
+    '''
+    params:
+    {
+        "dev": {name}, #交换机名称
+        "manufacturer": "h3c", #支持h3c,hw
+        "mgmt_ip": "192.168.10.1", #管理IP
+        "vtep_ip": "10.10.10.5", # vtep ip可选
+    }
+    Response:
+    {
+        "code": num;
+        "message": {}
+        "request_id": {}
+    }
+    '''
+    nfc = CNetconfController()
+    try:
+        ret = nfc.add_switch(params)
+    except CcnetInvalidRequestException as err:
+        err = { "code": err.code, "message": err.message}
+        return HttpResponseBadRequest(json.dumps(err,ensure_ascii=False),content_type="application/json;charset=utf-8")
     except:
         return HttpResponseServerError()
     return HttpResponse(json.dumps(ret,ensure_ascii=False),content_type="application/json;charset=utf-8")
