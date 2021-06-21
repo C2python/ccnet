@@ -17,8 +17,20 @@ Manage Netdevice.
 - 默认监听80端口
 - 部署：
 `# ./deploy.sh`
-- 服务启动:
-`# systemctl start ccnet`
+
+- 服务启动,ccnet服务:
+`# systemctl start ccnet` 
+`# systemctl enable ccnet`
+
+- 服务启动，celery服务
+`# systemctl start ccnet_celery` 
+`# systemctl enable ccnet_celery`
+
+3. 本地调试：
+- 运行ccnet
+`# python3 manage.py runserver 8000`
+- 运行celery
+`# celery -A ccnet worker -l INFO`
 
 ## 单元测试
 

@@ -3,10 +3,12 @@ Description=Project CCnet Server
 After=syslog.target
  
 [Service]
-KillSignal=SIGQUIT
-ExecStart=/usr/local/bin/uwsgi --ini /opt/production/ccnet/ccnet_updns.ini
-Restart=always
 Type=forking
+User=ccnet
+Group=ccnet
+KillSignal=SIGQUIT
+ExecStart=/usr/local/bin/uwsgi --ini /opt/production/ccnet/uwsgi_ccnet.ini
+Restart=always
 PIDFile=/opt/production/ccnet-master.pid
 NotifyAccess=all
 StandardError=syslog
