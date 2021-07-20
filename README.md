@@ -7,7 +7,7 @@ Manage Netdevice.
 
     `yum install python3 mysql-devel python3-devel.x86_64  -y`
     
-    `pip3 install django uwsgi mysqlclient requests`
+    `pip3 install django uwsgi mysqlclient requests redis`
 
     `pip3 install django-celery-results celery celery[redis] django-celery-beat`
 
@@ -19,11 +19,11 @@ Manage Netdevice.
 `# ./deploy.sh`
 
 - 服务启动,ccnet服务:
-`# systemctl start ccnet` 
+`# systemctl start ccnet`  
 `# systemctl enable ccnet`
 
 - 服务启动，celery服务
-`# systemctl start ccnet_celery` 
+`# systemctl start ccnet_celery`  
 `# systemctl enable ccnet_celery`
 
 3. 本地调试：
@@ -41,3 +41,11 @@ Manage Netdevice.
 **运行指定测试案例**
 
 `# ./manage.py test sdnet.tests.{}`
+
+## rabbitmq作为broker
+```
+# rabbitmqctl add_user ccnet passw0rd123!
+# rabbitmqctl add_vhost ccnet
+# rabbitmqctl set_user_tags ccnet ccnet_tag
+# rabbitmqctl set_permissions -p ccnet ccnet ".*" ".*" ".*"
+```

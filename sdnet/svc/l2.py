@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
+from sdnet import task
+
 from sdnet.exceptions.ccnet_exceptions import CcnetInvalidRequestException
 from sdnet.svc.netconf_controller import CNetconfController
 from django.http import HttpResponse
@@ -12,6 +14,24 @@ import logging
 import json
 
 logger = logging.getLogger(__name__)
+
+
+def test_task(request,params):
+    '''
+    kwargs:
+        name: {add_task}
+        x: 1
+        y: 2
+    '''
+    res = task.add.delay(params["x"], params["y"])
+    ret = {"code":0,
+            "message": "Call Task Success",
+            "request_id": " ",
+            "data": {
+                "res_id": res.id,
+            }
+            }
+    return HttpResponse(json.dumps(ret,ensure_ascii=False),content_type="application/json;charset=utf-8")
 
 def create_vlan(request,params):
     '''
